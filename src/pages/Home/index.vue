@@ -1,0 +1,33 @@
+<template>
+  <div>
+     <TypeNav/>
+     <ListContainer></ListContainer>
+     <Recommend></Recommend>
+  </div>
+</template>
+
+<script>
+import ListContainer from '@/pages/Home/ListContainer'
+import Recommend from '@/pages/Home/Recommend'
+import {mapState} from 'vuex'
+
+export default {
+  components:{
+    ListContainer,
+    Recommend,
+  },
+  mounted(){
+    this.$router.dispatch('getFloorList');
+  },
+  computed:{
+    ...mapState({
+      floorList:state=>state.home.floorList
+    })
+  }
+
+}
+</script>
+
+<style>
+
+</style>
