@@ -1,8 +1,15 @@
 <template>
   <div>
      <TypeNav/>
-     <ListContainer></ListContainer>
-     <Recommend></Recommend>
+     <ListContainer/>
+     <Recommend/>
+     <Rank/>
+     <Like/>
+     <Floor v-for='(floor,index) in floorList' :key='floor.id' :list='floor'/>
+     
+     <Brand/>
+
+
   </div>
 </template>
 
@@ -19,6 +26,7 @@ export default {
   mounted(){
     this.$router.dispatch('getFloorList');
   },
+
   computed:{
     ...mapState({
       floorList:state=>state.home.floorList

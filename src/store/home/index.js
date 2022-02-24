@@ -4,6 +4,7 @@ const state={
     categoryList:[],
     bannerList:[],
     floorList:[],
+
 };
 const mutation={
     CATEGORYLIST(state,categoryList){
@@ -12,9 +13,10 @@ const mutation={
     GETBANNERLIST(state,bannerList){
         state.bannerList=bannerList;
 
-    }
+    },
     GETFLOORLIST(state,floorList){
         state.floorList=floorList
+    
     }
 
 };
@@ -27,7 +29,7 @@ const actions={
     },
 
     async GetBannerList({commit}){
-     let =  await  reGetBannerList();
+     let result=  await  reGetBannerList();
      if(result.code==200){
          commit('GETBANNERLIST',result.data);
      }
@@ -36,6 +38,7 @@ const actions={
         let result=await reFloorList();
         if(result.code=200){
             commit('GETFLOORLIST',result.data);
+
         }
     }
     

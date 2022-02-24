@@ -102,6 +102,7 @@ export default {
 
   computed:{
       ...mapState({
+          immediate:true,
           bannerList:state=>state.home.bannerList
       })
   },
