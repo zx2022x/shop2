@@ -54,6 +54,7 @@
 <script>
 export default {
  name:'',
+
  data(){
      return{
         keyword:''
@@ -74,7 +75,13 @@ export default {
      }
     
  },
+},
+mounted(){
+  this.$bus.$on("clear",()=>{
+    this.keyword='';
+  })
 }
+
 </script>
 
 <style scoped lang='less'>

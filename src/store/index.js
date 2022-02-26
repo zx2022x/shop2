@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 import home from './home';
 import search from './search'
+
 // const state={
 //     count:1
 // };
