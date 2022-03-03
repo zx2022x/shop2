@@ -16,7 +16,9 @@ export default {
      Footer,
      
    },
+
    mounted:{
+
       this.$store.dispatch("categoryList");
    }
 }
