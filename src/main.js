@@ -9,7 +9,9 @@ import store from '@/store'
 import "@/mock/mockServe"
 import 'swiper/css/swiper.css'
 import Carsousel from '@/components/Carsousel'
+import Pagination from '@/components/Pagination'
 Vue.component(Carsousel.name,Carsousel)
+Vue.component(Pagination.name,Pagination)
 reCategoryList();
 new Vue({
   render: h => h(App),

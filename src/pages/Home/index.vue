@@ -25,6 +25,7 @@ export default {
   },
   mounted(){
     this.$router.dispatch('getFloorList');
+    this.$store.dispatch('getUserInfo');
   },
 
   computed:{

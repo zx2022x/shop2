@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
-import Home from '@/pages/Home'
-import Login from'@/pages/Login'
-import Register from '@/pages/Register'
-import Search from '@/pages/Search'
+import routes from './routes'
+import store from '@/store'
+import { nextTick } from 'vue/types/umd';
 
 let originPush =VueRouter.prototype.push;
 let originReplace=VueRouter.prototype.replace;
@@ -29,46 +28,37 @@ VueRouter.prototype.replace=function(location,resolve,reject){
     
 
 }
-export default new VueRouter({
-    routes:[
-        {
-            path:'/home',
-            component:Home,
-            meta:{
-                show:true
-            }
-        },
-        {
-             path:'/login',
-             component:Login,
-             meta:{
-                show:false
-            }
-        },
-        {
-            path:'/register',
-            component:Register
-        },
-        {
-            path:'/search/:keyword',
-            component:Search,
-            meta:{
-                show:true
-            },
-            name:'search'
-            
-            
 
+let router=new VueRouter({
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        return {x:0,y:0}
+      }
+})
+router.beforeEach(async (to,from,next)=>{
 
-        },
-        {
-            path:'*',
-            redirect:'/home'
-        }
+   let token=store.state.user.token;
+   let name=store.state.user.userInfo.name;
+   if(token){
+      if(to.path='/login'){
+          next('/home');
+      }
+   }else{
+       if(name){
+
+       }else{
+           try {
+
+            await store.dispatch('getUserInfo');
+            next();
+        } catch (error) {
+             await store.dispatch('userLogout');
+             next('/login');
+           }
         
-
-
-      
-    ]
+       }
+       next();
+   }
 
 })
+export default router;

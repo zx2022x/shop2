@@ -5,10 +5,14 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if='!userName'>
             <span>请</span>
             <router-link to="./login">登录</router-link>
             <router-link to="./register" class="register">免费注册</router-link>
+          </p>
+          <p v-esle>
+                <a>{{userName}}</a>
+                <a class="register" @click="logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
@@ -75,13 +79,31 @@ export default {
      }
     
  },
+ async logout(){
+   try {
+
+    await this.$store.dispatch('userLogin');
+          this.$router.push('/home');
+   } catch (error) {
+       alert(error.message);
+ 
+   }
+    
+ }
 },
 mounted(){
   this.$bus.$on("clear",()=>{
     this.keyword='';
   })
-}
+},
+computed:{
+    userName(){
 
+      return this.$store.state.user.userInfo.name
+    
+    }
+}
+}
 </script>
 
 <style scoped lang='less'>

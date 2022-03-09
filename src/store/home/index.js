@@ -1,10 +1,11 @@
 import {reCategoryList,reGetBannerList,reFloorList} from '@/api';
 
 const state={
-    categoryList:[],
+    // 根据服务器返回的数据进行设置
+    categoryList:[],  
     bannerList:[],
     floorList:[],
-
+   
 };
 const mutation={
     CATEGORYLIST(state,categoryList){
